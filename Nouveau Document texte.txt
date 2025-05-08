@@ -1,0 +1,14 @@
+4. Conception de l'interface utilisateur : - Concevez des interfaces utilisateur (UI) en garantissant une mise en page claire et intuitive. - Mettez en œuvre des principes de conception réactive pour garantir la compatibilité avec différentes tailles d'écran et appareils. - Utilisez des frameworks CSS comme Bootstrap ou Material-UI pour styliser les composants et maintenir la cohérence dans l'ensemble de l'application.
+
+Intégration avec les API Backend :
+Définissez les points de terminaison API fournis par le backend pour récupérer les données liées aux produits, aux informations utilisateur, aux commandes, etc.
+Utilisez des bibliothèques comme Axios ou l'API Fetch intégrée pour effectuer des requêtes HTTP vers les points de terminaison backend et gérer les réponses.
+Authentification et autorisation des utilisateurs :
+Implémentez des fonctionnalités d’authentification des utilisateurs telles que les formulaires de connexion, d’inscription et de réinitialisation du mot de passe.
+Gérez les sessions utilisateur et les jetons d'authentification en toute sécurité, en suivant les meilleures pratiques telles que JWT (JSON Web Tokens).
+Catalogue de produits et recherche :
+Affichez un catalogue de produits récupérés depuis le backend, y compris des images, des descriptions, des prix et d'autres détails pertinents.
+Implémentez des fonctionnalités de recherche et de filtrage pour permettre aux utilisateurs de trouver des produits en fonction de catégories, de mots-clés ou d'attributs.
+Panier d'achat et processus de paiement :
+Développer des composants pour gérer le panier d'achat, y compris l'ajout/la suppression d'articles, la mise à jour des quantités et le calcul des prix totaux.
+Concevoir et mettre en œuvre le processus de paiement, y compris la collecte des informations d'expédition, la sélection des modes de paiement et la confirmation des commandes.
