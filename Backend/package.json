@@ -5,7 +5,7 @@
   "editor.formatOnSave": true,
   "scripts": {
     "back": "nodemon server",
-    "front": "cd.. && cd client && npm start",
+    "front": "cd .. && cd client && npm start",
     "dev":"concurrently \"npm run back\" \"npm run front\""
   },
   "author": "Laamiri Yassine",

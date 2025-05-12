@@ -1,5 +1,5 @@
 const jwt=require("jsonwebtoken")
-const User = require("../model/User")
+const User = require("../models/User")
 
 
 
@@ -21,8 +21,9 @@ const isAuth = async(req,res,next)=>{
         //recupper les données du user 
         req.user=foundUser;
         next();
+
     } catch (error) {
-        res.status(401).json({errors:[{msg:"Impossible de vérifié"}]})
+        res.status(401).json({errors:[{msg:"Impossible de vérifier"}]})
         
     }
 }

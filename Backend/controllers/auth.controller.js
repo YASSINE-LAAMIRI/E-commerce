@@ -1,7 +1,7 @@
 
 // Importation du modèle User
 const { json } = require("express");
-const User = require("../model/User");
+const User = require("../models/User");
 const bcrypt = require("bcrypt")
 const jwt=require("jsonwebtoken")
 //Définition de la fonction "register"
@@ -36,8 +36,10 @@ try {
         { expiresIn: "2h" }
       );
 
-    res.status(200).json({success:[{msg:"Enregistrement avec succées !"}],User:newUser,
-    token})
+    res.status(200).json({
+        success:[{msg:"Enregistrement avec succées !"}],
+        User:newUser,
+        token})
 
 } catch (error) {
     res.status(400).json({errors:[{msg:"enregistrement a échoué"}],error})

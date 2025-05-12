@@ -11,12 +11,19 @@ const app = express();
 app.use(express.json( ))
 // appel de la fonction connectDB
 connectDB()
+
 //Route pour l'authentification
 app.use("/api/auth",require("./routes/auth.route"))
+
 //route pour la manipulation des users 
 app.use("/api/user",require("./routes/user.route"))
+
+//route pour la manipulation des produits
+
+app.use("/api/product",require("./routes/product.route"))
+
 //Port
-const PORT = process.env.PORT 
+const PORT = process.env.PORT
 //listen
 app.listen(PORT,(err)=>{  
       err

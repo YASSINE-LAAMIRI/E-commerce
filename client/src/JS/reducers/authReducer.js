@@ -1,5 +1,5 @@
 const { current } = require("../actions/authAction");
-const { LOAD_AUTH, SUCCESS_AUTH, FAIL_AUTH, CURRENT_AUTH, LOGOUT_AUTH } = require("../actionTypes/authActionTypes");
+const { LOAD_AUTH, SUCCESS_AUTH, FAIL_AUTH, CURRENT_AUTH, LOGOUT_AUTH, CLEAR_SUCCESS_AUTH, CLEAR_ERRORS_AUTH } = require("../actionTypes/authActionTypes");
 
 //initialisation 
 const initialstate={
@@ -16,17 +16,24 @@ const initialstate={
 const authReducer = (state=initialstate,{type,payload})=>{
     switch (type) {
         case LOAD_AUTH:return{
-            ...state,isLoad:true
+            ...state,
+            isLoad:true
         }
         case SUCCESS_AUTH:localStorage.setItem("token",payload.token)
         return{
-            ...state,isLoad:true,
-            user:payload.user,
+            ...state,
+            isLoad:true,
+            user:payload.User,
             success:payload.success,
             isAuth:true,
         }
-        case FAIL_AUTH : return{...state,isLoad:false,errors:payload}
-        case CURRENT_AUTH: return{...state,isLoad:false,user:payload,
+        case FAIL_AUTH : return{
+            ...state,
+            isLoad:false,
+            errors:payload}
+        case CURRENT_AUTH: return{...state,
+            isLoad:false,
+            user:payload,
             isAuth:true,
         }
         case LOGOUT_AUTH:
@@ -37,7 +44,17 @@ const authReducer = (state=initialstate,{type,payload})=>{
                 errors:[],
                 success:[],
                 isAuth:false, 
-            }       
+            }  
+            case CLEAR_SUCCESS_AUTH:
+                return{
+                    ...state,
+                    success:[]
+                }
+            case CLEAR_ERRORS_AUTH:
+                return{
+                    ...state,
+                    errors:[]
+                }     
     
         default:
            return state;

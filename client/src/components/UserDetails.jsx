@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react'
+// import React, { useEffect } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { getOneUser } from '../JS/actions/userAction'
-// import { getOneUser } from '../../../Backend/controllers/user.controller'
+// import { getOneUser } from '../JS/actions/userAction'
 
 
-const UserDetails = ({show,handleClose,userId}) => {
-    const dispatch = useDispatch()
-    const {user,isLoad}= useSelector(state=>state.userReducer)
-    useEffect(()=>{
-        dispatch(getOneUser(userId))
+const UserDetails = ({show, handleClose, userId}) => {
+    const userToGet = useSelector((state)=>state.userReducer.user)
+    //const dispatch = useDispatch()
+    const {user,isLoad}= useSelector((state)=>state.userReducer)
+    // useEffect(()=>{
+    //     dispatch(getOneUser(userId))
 
-    },[dispatch,userId])
+    // },[dispatch,userId])
   return (
     <div>
             <Modal show={show} onHide={handleClose}>
@@ -21,9 +21,13 @@ const UserDetails = ({show,handleClose,userId}) => {
         <Modal.Body>
             {user && !isLoad && (
                 <div>
-                    <p>Nom:{user.name}</p>
-                     <p>email:{user.email}</p>
-                     <p> phone:{user.phone}</p>
+                    <p>
+                      <strong>Name: </strong>{userToGet.name}</p>
+                     <p>
+                      <strong>Email: </strong>
+                      {userToGet.email}</p>
+                     <p> 
+                      <strong>Phone: </strong> {userToGet.phone}</p>
                  
                    
                 </div>

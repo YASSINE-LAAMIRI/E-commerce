@@ -22,15 +22,16 @@ switch (type) {
         isLoad:true
     }
     case GET_ALL_USERS:
-        console.log(payload)
-    return{
+       // console.log(payload)
+        return{
         ...state,
         isLoad:false,
         users:payload,
         // success:payload.success
     }
 
-    case GET_USER : return {
+    case GET_USER : 
+        return {
         ...state, 
         isLoad:false,
         user:payload,
@@ -38,10 +39,11 @@ switch (type) {
     }
 
     case DELETE_USER:
-        const newlist = state.users.filter(el=>el._id !== payload)
+        const newlist = state.users.filter((el)=>el._id !== payload.id)
         return {
         ...state,
         isLoad:false,
+         user:payload,
         users:newlist,
        // success:payload.success,
     }
@@ -49,8 +51,8 @@ switch (type) {
     case FAIL_USER:
         return{
             ...state,
-            isLoad:false,
-            errors:payload
+            isLoad: false,
+            errors: payload
         }
         
        

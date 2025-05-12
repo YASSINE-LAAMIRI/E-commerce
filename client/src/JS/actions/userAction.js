@@ -10,7 +10,7 @@ export const getUsers = ()=> async(dispatch)=>{
                 authorization: localStorage.getItem("token"),
             },
         }
-        const result = await axios.get("/api/user/allUsers ",config)
+        const result = await axios.get("/api/user/allUsers",config)
         dispatch({
 
             type:GET_ALL_USERS,
@@ -27,7 +27,7 @@ export const getUsers = ()=> async(dispatch)=>{
 
 //getOne (détail d'un utilisateur)
 
-export const getOneUser = (id)=> async(dispatch)=>{
+export const getOneUser = (_id)=> async(dispatch)=>{
     dispatch ({type:LOAD_USER})
     try {
         
@@ -36,13 +36,13 @@ export const getOneUser = (id)=> async(dispatch)=>{
                 authorization:localStorage.getItem("token")
             }
         }
-        const result = await axios.get(`/api/user/${id}`,config)
+        const result = await axios.get(`/api/user/${_id}`,config)
         dispatch({
 
-            type:GET_USER,
-            payload:result.data.userToGet,
+            type: GET_USER,
+            payload: result.data.userToGet,
         })
-
+console.log(result.data)
     } catch (error) {
 
         dispatch ({FAIL_USER,payload:error.response.data.errors})
@@ -67,9 +67,10 @@ export const deleteUser = (id)=> async(dispatch)=>{
             type:DELETE_USER,
             payload:result.data.userToDelete,
         })
-        
+        //pour metttre à jour la liste des users
+        dispatch(getUsers())
     } catch (error) {
 
-        dispatch ({FAIL_USER,payload:error.response.data.errors})        
+        dispatch ({FAIL_USER,payload: error.response.data.errors})        
     }
 };
