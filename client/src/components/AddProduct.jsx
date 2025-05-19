@@ -34,8 +34,8 @@ const handleAddProduct =(e) => {
   handleClose();// fermer la boite une fois il valide
 }
   return (
-    <>
-      <Button variant="primary" onClick={handleShow}>
+    <div style={{margin:"20px", padding:"20px"}}>
+      <Button  variant="dark"  onClick={handleShow}>
         Ajouter un produit
       </Button>
 
@@ -104,7 +104,7 @@ const handleAddProduct =(e) => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
 }
 

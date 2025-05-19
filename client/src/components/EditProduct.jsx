@@ -19,14 +19,14 @@ const [prodtoEdit,setProdtoEdit] = useState({
     description: product.description,
     price: product.price,
     image: product.image,
+    category: product.category,
   //category: product.category,
   quantity: product.quantity,
 })
 console.log(prodtoEdit)
 const handleChange = (e) => {
   setProdtoEdit({...prodtoEdit,
-    [e.target.name]:e.
-    target.value})
+    [e.target.name]:e.target.value})
 }
 const handleEdit = (e) => {
   e.preventDefault();
@@ -49,7 +49,7 @@ const handleEdit = (e) => {
   
   return (
     <>
-      <Button variant="success" onClick={handleShow}>
+      <Button variant="outline-info" onClick={handleShow}>
         Edit
       </Button>
 
@@ -60,16 +60,16 @@ const handleEdit = (e) => {
         <Modal.Body>
               {/* // Formulaire d'ajout de produit */}
 
- <Form>
-  <Form.Group className="mb-3">
-    <Form.Control
+ <Form >
+  <Form.Group className="mb-3 " >
+    <Form.Control style={{marginBottom:"10px"}}
       type="text"
       placeholder="Titre..."
       name="title"
       value={prodtoEdit.title}
       onChange={handleChange}
     />
-    <Form.Control
+    <Form.Control style={{marginBottom:"10px"}}
       type="text"
       placeholder="L'URL de l'image..."
       name="image"
@@ -77,7 +77,7 @@ const handleEdit = (e) => {
       onChange={handleChange}
     />
 
-     <Form.Control
+     <Form.Control style={{marginBottom:"10px"}}
       type="text"
       placeholder="Category..."
       name="category"
@@ -85,21 +85,21 @@ const handleEdit = (e) => {
       onChange={handleChange}
     />
 
-    <Form.Control
+    <Form.Control style={{marginBottom:"10px"}}
       type="text"
       placeholder="Description..."
       name="description"
       value={prodtoEdit.description}
       onChange={handleChange}
     />
-    <Form.Control
+    <Form.Control style={{marginBottom:"10px"}}
       type="number"
       placeholder="Prix..."
       name="price"
       value={prodtoEdit.price}
       onChange={handleChange}
     />
-    <Form.Control
+    <Form.Control style={{marginBottom:"10px"}}
       type="number"
       placeholder="Quantité..."
       name="quantity"

@@ -36,6 +36,7 @@ import {
   ButtonGroup,
   Card,
 } from 'react-bootstrap';
+import { addToCart } from '../JS/actions/cartActions';
 
 const DetailProd = () => {
   const { id } = useParams();
@@ -78,7 +79,7 @@ const DetailProd = () => {
               ))}
             </Col> */}
             <Col xs={9}>
-              <Image src={mainImage} fluid rounded />
+              <Image src={mainImage} fluid rounded  alt={product.title}/>
             </Col>
           </Col>
 
@@ -87,8 +88,7 @@ const DetailProd = () => {
             <div className="mb-3">
               <h2 className="fw-bold">{product.title}</h2>
               <div>
-                {/* <Badge bg="warning" text="dark">★★★★★</Badge>{' '}
-                <span className="text-muted">(122 reviews)</span> */}
+               
               </div>
             </div>
 
@@ -98,7 +98,7 @@ const DetailProd = () => {
             <div className="mb-3">
               <h6 className="fw-semibold">Select Size</h6>
               <ButtonGroup>
-                {['M', 'L', 'XL'].map(size => (
+                {['S','M', 'L', 'XL'].map(size => (
                   <Button
                     key={size}
                     variant={selectedSize === size ? 'dark' : 'outline-secondary'}
@@ -110,9 +110,16 @@ const DetailProd = () => {
               </ButtonGroup>
             </div>
 
-            <Button variant="dark" size="lg" className="w-100 mt-3">
-              🛒 Add to Cart
-            </Button>
+          <Button
+  variant="dark"
+  size="lg"
+  className="w-100 mt-3"
+  onClick={() => dispatch(addToCart(product, 1))
+    
+  }
+>
+  🛒 Add to Cart
+</Button>
             <hr className="my-4" />
             <ul className="text-muted small">
               <li>✅ 100% Original product</li>

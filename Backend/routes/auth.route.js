@@ -11,7 +11,6 @@ router.get("/test",(req,res)=>{
     res.json('ceci est un test route auth')
 })
 
-
 // Route pour l'inscription
 router.post("/register", registerValidation(), validation, register);
 

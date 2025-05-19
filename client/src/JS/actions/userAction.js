@@ -42,7 +42,7 @@ export const getOneUser = (_id)=> async(dispatch)=>{
             type: GET_USER,
             payload: result.data.userToGet,
         })
-console.log(result.data)
+// console.log(result.data)
     } catch (error) {
 
         dispatch ({FAIL_USER,payload:error.response.data.errors})

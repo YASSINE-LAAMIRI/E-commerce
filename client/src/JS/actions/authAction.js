@@ -4,6 +4,8 @@
 //import { useNavigate } from "react-router-dom"
 import {CLEAR_ERRORS_AUTH, CLEAR_SUCCESS_AUTH, CURRENT_AUTH, FAIL_AUTH, LOAD_AUTH, LOGOUT_AUTH, SUCCESS_AUTH } from "../actionTypes/authActionTypes"
 
+
+
 import axios from "axios"
 
 
@@ -56,7 +58,6 @@ export const login = (user,navigate)=>async (dispatch)=>{
 
 export const current = () => async (dispatch)=>{
     dispatch({type:LOAD_AUTH})
-
     try {
         let config={headers:{authorization:localStorage.getItem("token"),
         }
@@ -86,3 +87,4 @@ export const clearSuccess = () => {
     type: CLEAR_SUCCESS_AUTH
 };
   }
+

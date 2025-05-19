@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
-import { useIsRTL } from 'react-bootstrap/esm/ThemeProvider'
 import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../JS/actions/authAction'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../components/Loading'
+import { FaSignInAlt } from 'react-icons/fa'
 
 const Register = () => {
 
@@ -35,40 +35,16 @@ const handleRegister = (e)=>{
 
 }
   return (
-    <div className='container m-4'>
+    <div className='container'>
       {" "}
       {isLoad && <Loading/>}
-        {/* <Form onSubmit={handleRegister}>
+    
+{/* <div className="d-flex justify-content-center align-items-center vh-100 bg-light" > */}
+  <div  >
+    <Form onSubmit={handleRegister} style={{ margin: '120px' }} >
+      <h3 className="text-center mb-5">Créer votre compte</h3>
 
-        <Form.Group className="mb-3" >       
-        <Form.Control type="text" placeholder="Enter votre Nom" name="name" value={newUser.name} onChange={handleChange}/>     
-      </Form.Group>
-
-      <Form.Group className="mb-3" >       
-        <Form.Control type="email" placeholder="Enter email" name="email" value={newUser.email} onChange={handleChange}/>     
-      </Form.Group>
-
-      <Form.Group className="mb-3" >
-        <Form.Control type="password" placeholder="Password" name="password" value={newUser.password} onChange={handleChange}/>
-      </Form.Group>
-
-      <Form.Group className="mb-3" >
-        <Form.Control type="tel" placeholder="Phone" name="phone" value={newUser.phone} onChange={handleChange}/>
-      </Form.Group>
-
-    <p>Vous êtes déja un client ? <a href='/login'>login</a> maintenant</p>
-      <Button variant="primary" type="submit">
-        Register
-      </Button>
-    </Form> */}
-
-
-<div className="d-flex justify-content-center align-items-center vh-100 bg-light" >
-  <div className="p-4 shadow rounded bg-white" style={{ minWidth: '400px' }}>
-    <Form onSubmit={handleRegister}>
-      <h3 className="text-center mb-4">Créer un compte</h3>
-
-      <Form.Group className="mb-3">
+      <Form.Group className="text-center mb-4 mb-3">
         <Form.Control
           type="text"
           placeholder="Entrez votre nom"
@@ -114,15 +90,18 @@ const handleRegister = (e)=>{
         </p>
       </div>
 
-      <Button variant="primary" type="submit" className="w-100">
+     <div className="d-grid">
+             <Button variant="primary" type="submit" className="rounded-pill">
+               <FaSignInAlt className="me-2" />
         S'inscrire
       </Button>
+       </div>
     </Form>
   </div>
 </div>
 
 
-    </div>
+    // </div>
   )
 }
 

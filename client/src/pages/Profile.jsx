@@ -19,10 +19,11 @@ const Profile = () => {
   return (
     <div>
 
-      <h2> Hello {user?.name}</h2>
+      {/* <h2 style={{margin:"10px", padding:"10px"}}> Hello {user?.name}</h2> */}
       {/* <ListProd products={myProd}/>   */}
       <AddProduct/>
       {Array.isArray(myProd) && <ListProd products={myProd} all={false}/>}
+      
 
     </div>
   )

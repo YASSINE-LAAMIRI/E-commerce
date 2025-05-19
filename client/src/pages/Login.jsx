@@ -25,7 +25,7 @@ const handleLogin=(e)=>{
   dispatch(login(user,navigate))
 }
   return (
-    <div className='container m-4'>
+    <div className='container '>
 {" "}
 {isLoad && <Loading/>}
 {/* <Form onSubmit={handleLogin}>
@@ -46,14 +46,15 @@ const handleLogin=(e)=>{
     </Form> */}
 
 
+ {/* style={{ marginTop: '120px' }} 
+ style={{ width: '100%', maxWidth: '400px' }}*/}
 
+<Form onSubmit={handleLogin} style={{ margin: '120px' }} >
+  <Container>
+    {/* <Card className="p-4 shadow rounded" > */}
+      <h3 className="text-center mb-5">Connectez-vous à votre compte</h3>
 
-<Form onSubmit={handleLogin}>
-  <Container className="d-flex justify-content-center" style={{ marginTop: '120px' }}>
-    <Card className="p-4 shadow rounded" style={{ width: '100%', maxWidth: '400px' }}>
-      <h3 className="text-center mb-4">Connexion</h3>
-
-      <Form.Group className="mb-3">
+      <Form.Group className="text-center mb-4 mb-3">
         <Form.Control
           type="email"
           placeholder="Entrez votre email"
@@ -85,7 +86,7 @@ const handleLogin=(e)=>{
           Se connecter
         </Button>
       </div>
-    </Card>
+    {/* </Card> */}
   </Container>
 </Form>
 
