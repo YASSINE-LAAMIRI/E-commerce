@@ -28,7 +28,9 @@ const orderSchema = new mongoose.Schema({
     paymentMethod: String,
     status: {
         type: String,
-        enum: ['In preparation', 'Shipped', 'Delivered'],
+        enum: ['In preparation', 
+                'Shipped',
+                'Delivered'],
         default: 'In preparation'
     },
     createdAt: {

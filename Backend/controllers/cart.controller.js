@@ -6,9 +6,12 @@ exports.addToCart = async (req, res) => {
 
 
     const { productId, quantity } = req.body;
-    console.log('👉 req.user:', req.user);
+    console.log('👉 req.user:', req.user._id);
     console.log('👉 req.body:', req.body);
 console.log('🛑 type de quantity:', typeof quantity, 'valeur:', quantity);
+if (!req.user || !req.user._id) {
+  return res.status(401).json({ msg: "Utilisateur non authentifié 🔒" });
+}
     if (!productId || !quantity) {
         return res.status(400).json({ msg: 'productId et quantity sont requis 🛑' });
     }
@@ -19,9 +22,9 @@ console.log('🛑 type de quantity:', typeof quantity, 'valeur:', quantity);
             return res.status(404).json({ msg: 'Produit non trouvé 🙁' });
         }
 
-        let cart = await Cart.findOne({ user: req.user.id });
+        let cart = await Cart.findOne({ user: req.user._id });
         if (!cart) {
-            cart = new Cart({ user: req.user.id, items: [] });
+            cart = new Cart({ user: req.user._id, items: [] });
         }
 
         const item = cart.items.find(item => item.product.toString() === productId);

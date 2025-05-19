@@ -1,9 +1,10 @@
+
+
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllOrders, updateOrderStatus } from '../JS/actions/orderAction';
 import { Container, Row, Col, Card, Badge, Form, Button, Spinner, Alert } from 'react-bootstrap';
-import { FaBoxOpen, FaCalendarAlt, FaEuroSign, FaTruck, FaUser } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { FaBoxOpen, FaCalendarAlt, FaEuroSign, FaTruck } from 'react-icons/fa';
 
 const AllOrders = () => {
   const dispatch = useDispatch();
@@ -14,11 +15,14 @@ const AllOrders = () => {
     dispatch(getAllOrders());
   }, [dispatch]);
 
+  // Initialise les statuts dans state local dès que les commandes arrivent
   useEffect(() => {
     if (orders.length > 0) {
       const initialStatus = {};
       orders.forEach(order => {
-        initialStatus[order._id] = order.status;
+        if (order && order._id) {
+          initialStatus[order._id] = order.status || 'In preparation';
+        }
       });
       setStatusUpdate(initialStatus);
     }
@@ -50,8 +54,12 @@ const AllOrders = () => {
     'In preparation': 'En cours'
   };
 
+  // Trie les commandes par date décroissante
+  const sortedOrders = [...orders].filter(order => order && order._id)
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
   return (
-    <Container className="py-5" >
+    <Container className="py-5">
       <h2 className="mb-4 text-center fw-bold">📦 Toutes les commandes</h2>
 
       {isLoad ? (
@@ -59,38 +67,39 @@ const AllOrders = () => {
           <Spinner animation="border" />
           <p className="mt-3">Chargement des commandes...</p>
         </div>
-      ) : orders.length === 0 ? (
+      ) : sortedOrders.length === 0 ? (
         <Alert variant="info" className="text-center">Aucune commande trouvée.</Alert>
       ) : (
         <Row>
-          {orders.map(order => (
-            <Col key={order._id} md={6} lg={4} className="mb-4">
+          {sortedOrders.map(order => (
+            <Col key={order._id.toString()} md={6} lg={4} className="mb-4">
               <Card className="shadow border-2 h-100">
                 <Card.Header className="bg-white border-bottom-0 d-flex justify-content-between align-items-center">
-                  <span className="fw-bold"><FaBoxOpen className="me-2 text-primary" />Commande n°{order._id.slice(-6)}</span>
+                  <span className="fw-bold">
+                    <FaBoxOpen className="me-2 text-primary" />
+                    Commande n°{order._id ? order._id.toString().slice(-6) : 'Inconnue'}
+                  </span>
                   <Badge bg={getStatusColor(order.status)} className="text-uppercase">
-                    {statusLabels[order.status] || order.status}
+                    {statusLabels[order.status] || order.status || 'Statut inconnu'}
                   </Badge>
                 </Card.Header>
 
                 <Card.Body>
-                 
-
                   <div className="mb-2 text-muted small">
                     <FaCalendarAlt className="me-2" />
-                    Commandée le :  {new Date(order.createdAt).toLocaleDateString('fr-FR')}
+                    Commandée le : {order.createdAt ? new Date(order.createdAt).toLocaleDateString('fr-FR') : 'Date inconnue'}
                   </div>
 
                   <div className="mb-2 text-muted small">
                     <FaTruck className="me-2" />
-                    Livraison à : <span className="fw-semibold text-dark">{order.shippingAddress || 'N/A'}</span>
+                    Livraison à : <span className="fw-semibold text-dark">{order.shippingAddress || 'Adresse inconnue'}</span>
                   </div>
 
                   <hr />
 
                   <div className="mb-2 fw-bold">Mise à jour du statut :</div>
                   <Form.Select
-                    value={statusUpdate[order._id]}
+                    value={statusUpdate[order._id] || 'In preparation'}
                     onChange={(e) => handleStatusChange(order._id, e.target.value)}
                     className="mb-3"
                   >
@@ -103,13 +112,13 @@ const AllOrders = () => {
                     <Button variant="dark" size="sm" onClick={() => handleUpdate(order._id)}>
                       Mettre à jour
                     </Button>
-                    
                   </div>
                 </Card.Body>
 
                 <Card.Footer className="bg-light text-end">
                   <span className="fw-semibold text-dark">
-                    <FaEuroSign className="me-1" />Total : {order.total} €
+                    <FaEuroSign className="me-1" />
+                    Total : {order.total !== undefined ? order.total : 'N/A'} €
                   </span>
                 </Card.Footer>
               </Card>
