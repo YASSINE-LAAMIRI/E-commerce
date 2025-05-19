@@ -22,7 +22,7 @@ exports.allOrders = async (req, res) => {
         .populate({
             path: 'user',
             model:'user',
-            select:'fullName'
+            select:'name'
     })
         .populate({
             path:'products.product',
@@ -125,7 +125,7 @@ exports.updateStatus = async (req, res) => {
         .populate({
             path: 'user',
             model:'user',
-            select:'fullName'
+            select:'name'
     })
         .populate({
             path:'products.product',

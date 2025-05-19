@@ -1,5 +1,4 @@
 
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllOrders, updateOrderStatus } from '../JS/actions/orderAction';
@@ -82,9 +81,13 @@ const AllOrders = () => {
                   <Badge bg={getStatusColor(order.status)} className="text-uppercase">
                     {statusLabels[order.status] || order.status || 'Statut inconnu'}
                   </Badge>
+    
                 </Card.Header>
 
                 <Card.Body>
+                                 <div className="mb-2 text-muted small">
+    <strong>👤Client : </strong> {order.user ? order.user.name : 'Inconnu'}
+  </div>
                   <div className="mb-2 text-muted small">
                     <FaCalendarAlt className="me-2" />
                     Commandée le : {order.createdAt ? new Date(order.createdAt).toLocaleDateString('fr-FR') : 'Date inconnue'}
@@ -118,7 +121,7 @@ const AllOrders = () => {
                 <Card.Footer className="bg-light text-end">
                   <span className="fw-semibold text-dark">
                     <FaEuroSign className="me-1" />
-                    Total : {order.total !== undefined ? order.total : 'N/A'} €
+                    💰Total : {order.total !== undefined ? order.total : 'N/A'} €
                   </span>
                 </Card.Footer>
               </Card>
