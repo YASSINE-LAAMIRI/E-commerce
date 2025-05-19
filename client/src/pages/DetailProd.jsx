@@ -1,28 +1,3 @@
-// import React, { useEffect } from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { useParams } from 'react-router-dom'
-// import { getOneProd } from '../JS/actions/productAction'
-// const DetailProd = () => {
-//     const params = useParams()
-//     const dispatch = useDispatch()
-//     const product = useSelector(state => state.productReducer.prod)
- //console.log(product)
-//     useEffect(() => {
-//         dispatch(getOneProd(params.id))
-//     }, [ params,dispatch])
-//   return (
-//     <div>
-//         <h1>{product.title}</h1>
-//         {product.title}
-//         {product.description}
-//         <img src={product.image} alt={product.description} />
-//         <p>{product.price}$</p>
-//     </div>
-//   )
-// }
-
-// export default DetailProd
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
