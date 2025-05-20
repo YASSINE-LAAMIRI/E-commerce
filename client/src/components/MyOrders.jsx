@@ -109,11 +109,12 @@ const MyOrders = () => {
                     </div>
                   ))}
                 </Card.Body>
-                <Card.Footer className="bg-light text-end">
-                  <span className="fw-semibold text-dark">
-                    <FaEuroSign className="me-1" />Total : {order.total} €
-                  </span>
-                </Card.Footer>
+               <Card.Footer className="bg-light text-end">
+                                <span className="fw-semibold text-dark">
+                                  
+                                  💰Total : {order.total !== undefined ? order.total : 'N/A'} €
+                                </span>
+                              </Card.Footer>
               </Card>
             </Col>
           ))}

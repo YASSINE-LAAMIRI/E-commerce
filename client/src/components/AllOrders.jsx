@@ -120,7 +120,7 @@ const AllOrders = () => {
 
                 <Card.Footer className="bg-light text-end">
                   <span className="fw-semibold text-dark">
-                    <FaEuroSign className="me-1" />
+                    
                     💰Total : {order.total !== undefined ? order.total : 'N/A'} €
                   </span>
                 </Card.Footer>
