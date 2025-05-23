@@ -50,13 +50,13 @@ const NavBars = () => {
 
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto my-2 my-lg-0">
-            <Nav.Link onClick={() => handleNavigate('/')}>Home</Nav.Link>
+            <Nav.Link onClick={() => handleNavigate('/')}>Accueil</Nav.Link>
             <Nav.Link onClick={() => handleNavigate('/contactez-nous')}>Contact</Nav.Link>
 
             {user?.isAdmin && (
               <NavDropdown title="Admin" id="admin-dropdown" className="ms-2">
                 <NavDropdown.Item onClick={() => handleNavigate('/admin')}>Admin Panel</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => handleNavigate('/admin/orders')}>All Orders</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handleNavigate('/admin/orders')}>Toutes les commandes</NavDropdown.Item>
               </NavDropdown>
             )}
           </Nav>
@@ -66,7 +66,27 @@ const NavBars = () => {
           </div>
 
           <Nav className="d-flex align-items-center gap-3">
-            {isAuth && (
+          
+
+            {isAuth ? (
+              <>
+              <NavDropdown
+                title={<span className="text-primary text-capitalize">{user?.name}</span>}
+                id="user-dropdown"
+              >
+                <NavDropdown.Item onClick={() => handleNavigate('/profile')}>Profil</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handleNavigate('/Editprofile/')}>Modifier le profil</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handleNavigate('/myorders')}>Mes commandes</NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={() => {
+                    dispatch(logout(navigate));
+                    setExpanded(false);
+                  }}
+                >
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+
               <Nav.Link onClick={() => handleNavigate('/cart')} className="position-relative">
                 <FaShoppingCart size={22} />
                 {cartItemCount > 0 && (
@@ -79,27 +99,16 @@ const NavBars = () => {
                     {cartItemCount}
                   </Badge>
                 )}
-              </Nav.Link>
-            )}
+              </Nav.Link>       
+              </>
 
-            {isAuth ? (
-              <NavDropdown
-                title={<span className="text-primary text-capitalize">{user?.name}</span>}
-                id="user-dropdown"
-              >
-                <NavDropdown.Item onClick={() => handleNavigate('/profile')}>Profile</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => handleNavigate('/Editprofile/')}>Edit Profile</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => handleNavigate('/myorders')}>My Orders</NavDropdown.Item>
-                <NavDropdown.Item
-                  onClick={() => {
-                    dispatch(logout(navigate));
-                    setExpanded(false);
-                  }}
-                >
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            ) : (
+            ) 
+              
+              
+                 
+            
+            
+            : (
               <>
                 <Nav.Link onClick={() => handleNavigate('/login')}>Login</Nav.Link>
                 <Nav.Link onClick={() => handleNavigate('/register')}>Register</Nav.Link>
