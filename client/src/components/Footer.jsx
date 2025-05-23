@@ -23,10 +23,10 @@ const Footer = () => {
           <Col md={4} className="mb-4">
             <h6 className="text-uppercase fw-semibold mb-4 p-2">Quick Links</h6>
             <ul className="list-unstyled d-flex flex-wrap justify-content-center justify-content-md-start gap-3 px-5">
-              <li><a href="/" className="text-light text-decoration-none footer-link px-2 ">Home</a></li>
-              <li><a href="/about" className="text-light text-decoration-none footer-link px-2 ">About</a></li>
+              <li style={{paddingLeft: '40px'}}><a href="/" className="text-light text-decoration-none footer-link px-2 ">Home</a></li>
+              {/* <li><a href="/about" className="text-light text-decoration-none footer-link px-2 ">About</a></li> */}
               <li><a href="/contactez-nous" className="text-light text-decoration-none footer-link px-2">Contact</a></li>
-              <li><a href="profile" className="text-light text-decoration-none footer-link px-2">Profile</a></li>
+              <li ><a href="profile" className="text-light text-decoration-none footer-link px-2">Profile</a></li>
             </ul>
           </Col>
 
@@ -34,7 +34,7 @@ const Footer = () => {
 
           <Col md={3} className="mb-4">
             <h6 className="text-uppercase fw-semibold mb-3 p-2">Suivez-nous</h6>
-            <div className="d-flex gap-3 px-5">
+            <div  className="d-flex gap-3 px-5">
               <a href="https://www.Facebook.com" target="_blank" rel="noopener noreferrer" className="social-icon"><FaFacebookF /></a>
               <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" className="social-icon"><FaTwitter /></a>
               <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="social-icon"><FaInstagram /></a>

@@ -1,48 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from '../JS/actions/userAction';
-import { Button, Form, Container, Spinner, Toast, ToastContainer } from 'react-bootstrap';
+import { Button, Form, Container, Spinner, Alert } from 'react-bootstrap';
 
 const EditProfile = () => {
   const dispatch = useDispatch();
 
+  // Récupération des données auth dans le store Redux
   const { user, errors, success, isLoad } = useSelector((state) => state.authReducer);
 
+  // Formulaire local
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: ''
   });
 
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-  const [toastVariant, setToastVariant] = useState(''); // success | danger
+  // État de l’alerte (visible ou non), son message et sa couleur
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertVariant, setAlertVariant] = useState('warning'); // success | danger | warning
 
+  // Initialiser les champs formulaire à partir de user au chargement
   useEffect(() => {
     if (user) {
       setFormData({
         name: user.name || '',
         email: user.email || '',
+        phone: user.phone || '',
         password: ''
       });
     }
   }, [user]);
 
+  // Met à jour l’alerte quand success ou errors changent
   useEffect(() => {
     if (success) {
-      setToastVariant('success');
-      setToastMessage(success.msg || success);
-      setShowToast(true);
-      dispatch({ type: 'CLEAR_MESSAGES' });
+      setAlertVariant('success');
+      setAlertMessage(success.msg || success || 'Profil mis à jour avec succès !');
+      setShowAlert(true);
+    } else if (errors) {
+      setAlertVariant('danger');
+      const msg = Array.isArray(errors) ? errors[0] : errors.msg || errors || 'Une erreur est survenue.';
+      setAlertMessage(msg);
+      setShowAlert(true);
+    } else {
+      setShowAlert(false);
     }
-    if (errors) {
-      setToastVariant('danger');
-      const msg = Array.isArray(errors) ? errors[0] : errors.msg || errors;
-      setToastMessage(msg);
-      setShowToast(true);
-      dispatch({ type: 'CLEAR_MESSAGES' });
+  }, [success, errors]);
+
+  // Fermeture automatique de l’alerte après 4 secondes
+  useEffect(() => {
+    if (showAlert) {
+      const timer = setTimeout(() => setShowAlert(false), 4000);
+      return () => clearTimeout(timer);
     }
-  }, [success, errors, dispatch]);
+  }, [showAlert]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -57,12 +70,27 @@ const EditProfile = () => {
     <Container style={{ maxWidth: '500px', marginTop: '60px' }}>
       <h2 className="mb-4 text-center">Modifier mon profil</h2>
 
+      {/* Alerte React Bootstrap */}
+      {showAlert && (
+        <Alert
+          variant={alertVariant}
+          onClose={() => setShowAlert(false)}
+          dismissible
+          className="text-center fw-bold"
+          aria-live="polite"
+        >
+          {alertMessage}
+        </Alert>
+      )}
+
+      {/* Indicateur de chargement */}
       {isLoad && (
         <div className="text-center mb-3">
           <Spinner animation="border" variant="dark" />
         </div>
       )}
 
+      {/* Formulaire */}
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Nom</Form.Label>
@@ -88,6 +116,21 @@ const EditProfile = () => {
           />
         </Form.Group>
 
+             {/* Phone */}
+             <Form.Group className="mb-3">
+               <Form.Label>Téléphone</Form.Label>
+               <Form.Control
+                 type="tel"
+                 name="phone"
+                 placeholder="Numéro de téléphone"
+                 value={formData.phone}
+                 onChange={handleChange}
+                 required
+               />
+             </Form.Group>
+
+        {/* Mot de passe */}
+
         <Form.Group className="mb-4">
           <Form.Label>Nouveau mot de passe (facultatif)</Form.Label>
           <Form.Control
@@ -99,26 +142,10 @@ const EditProfile = () => {
           />
         </Form.Group>
 
-        <Button type="submit" variant="dark" className="w-100" disabled={isLoad}>
+        <Button type="submit" variant="dark" className="w-50" disabled={isLoad}>
           {isLoad ? 'Mise à jour...' : 'Enregistrer'}
         </Button>
       </Form>
-
-      {/* ✅ Toast flottant */}
-      <ToastContainer position="top-end" className="p-3">
-        <Toast
-          show={showToast}
-          bg={toastVariant}
-          onClose={() => setShowToast(false)}
-          delay={3000}
-          autohide
-        >
-          <Toast.Header>
-            <strong className="me-auto">Profil</strong>
-          </Toast.Header>
-          <Toast.Body className="text-white">{toastMessage}</Toast.Body>
-        </Toast>
-      </ToastContainer>
     </Container>
   );
 };

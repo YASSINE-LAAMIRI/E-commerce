@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMyOrders } from '../JS/actions/orderAction';
 import { Container, Row, Col, Card, Badge, Spinner, Alert,  } from 'react-bootstrap';
-import { FaBoxOpen, FaCalendarAlt, FaEuroSign, FaTruck } from 'react-icons/fa';
+import { FaBoxOpen, FaCalendarAlt,  FaTruck } from 'react-icons/fa';
 
 
 const MyOrders = () => {
