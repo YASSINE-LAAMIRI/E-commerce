@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Navbar,
   Nav,
@@ -13,20 +13,33 @@ import { FaShoppingCart } from 'react-icons/fa';
 import logo from '../../assets/logo.png';
 import SearchBar from '../SearchBar';
 
+// ... autres imports
+
 const NavBars = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [expanded, setExpanded] = useState(false); // mise a jour
 
   const { isAuth, user } = useSelector((state) => state.authReducer);
   const cartItems = useSelector((state) => state.cartReducer.cartItems || []);
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
+  const handleNavigate = (path) => {
+    navigate(path);
+    setExpanded(false); // permet de ferme le menu
+  };
+
   return (
-    <Navbar bg="light" expand="lg" className="shadow-sm px-4 py-3 sticky-top">
+    <Navbar
+      bg="light"
+      expand="lg"
+      expanded={expanded} //  contrôlé par l'état
+      onToggle={() => setExpanded(!expanded)} //  mis à jour automatiquement
+      className="shadow-sm px-4 py-3 sticky-top"
+    >
       <Container fluid>
-        {/* Logo */}
         <Navbar.Brand
-          onClick={() => navigate('/')}
+          onClick={() => handleNavigate('/')}
           className="d-flex align-items-center"
           style={{ cursor: 'pointer' }}
         >
@@ -34,35 +47,27 @@ const NavBars = () => {
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbarScroll" />
+
         <Navbar.Collapse id="navbarScroll">
-          {/* Left side: Links */}
           <Nav className="me-auto my-2 my-lg-0">
-            <Nav.Link onClick={() => navigate('/')}>Home</Nav.Link>
-            <Nav.Link onClick={() => navigate('/contactez-nous')}>Contact</Nav.Link>
-              {/* Admin Dropdown  */}
-                {user?.isAdmin && (
-                  <NavDropdown
-                    title={<span className="text">Admin</span>}
-                    id="admin-dropdown"
-                    className="ms-2"
-                  >
-                    {/* <NavDropdown.Header>Admin</NavDropdown.Header> */}
-                    <NavDropdown.Item onClick={() => navigate('/admin')}>Admin Panel</NavDropdown.Item>
-                    {/* <NavDropdown.Item onClick={() => navigate('/admin/users')}>All Users</NavDropdown.Item> */}
-                    <NavDropdown.Item onClick={() => navigate('/admin/orders')}>All Orders</NavDropdown.Item>
-                  </NavDropdown>
-                )}
+            <Nav.Link onClick={() => handleNavigate('/')}>Home</Nav.Link>
+            <Nav.Link onClick={() => handleNavigate('/contactez-nous')}>Contact</Nav.Link>
+
+            {user?.isAdmin && (
+              <NavDropdown title="Admin" id="admin-dropdown" className="ms-2">
+                <NavDropdown.Item onClick={() => handleNavigate('/admin')}>Admin Panel</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handleNavigate('/admin/orders')}>All Orders</NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
 
-          {/* Search Bar */}
           <div className="mx-auto pt-3" style={{ maxWidth: '500px', width: '100%' }}>
             <SearchBar />
           </div>
 
-          {/* Right side: Cart + User */}
           <Nav className="d-flex align-items-center gap-3">
             {isAuth && (
-              <Nav.Link onClick={() => navigate('/cart')} className="position-relative">
+              <Nav.Link onClick={() => handleNavigate('/cart')} className="position-relative">
                 <FaShoppingCart size={22} />
                 {cartItemCount > 0 && (
                   <Badge
@@ -78,23 +83,26 @@ const NavBars = () => {
             )}
 
             {isAuth ? (
-              <>
-                {/* Profile Dropdown */}
-                <NavDropdown
-                  title={<span className="text-primary text-capitalize">{user?.name}</span>}
-                  id="user-dropdown">                 
-                  <NavDropdown.Item onClick={() => navigate('/profile')}>Profile</NavDropdown.Item>
-                  <NavDropdown.Item onClick={() => navigate('/Editprofile/')}>Edit Profile</NavDropdown.Item>
-                  <NavDropdown.Item onClick={() => navigate('/myorders')}>My Orders</NavDropdown.Item>
-                  <NavDropdown.Item onClick={() => dispatch(logout(navigate))}>Logout</NavDropdown.Item>
-                </NavDropdown>
-
-            
-              </>
+              <NavDropdown
+                title={<span className="text-primary text-capitalize">{user?.name}</span>}
+                id="user-dropdown"
+              >
+                <NavDropdown.Item onClick={() => handleNavigate('/profile')}>Profile</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handleNavigate('/Editprofile/')}>Edit Profile</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handleNavigate('/myorders')}>My Orders</NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={() => {
+                    dispatch(logout(navigate));
+                    setExpanded(false);
+                  }}
+                >
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
             ) : (
               <>
-                <Nav.Link onClick={() => navigate('/login')}>Login</Nav.Link>
-                <Nav.Link onClick={() => navigate('/register')}>Register</Nav.Link>
+                <Nav.Link onClick={() => handleNavigate('/login')}>Login</Nav.Link>
+                <Nav.Link onClick={() => handleNavigate('/register')}>Register</Nav.Link>
               </>
             )}
           </Nav>
