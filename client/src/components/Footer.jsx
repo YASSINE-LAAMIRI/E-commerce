@@ -26,7 +26,7 @@ const Footer = () => {
               <li><a href="/" className="text-light text-decoration-none footer-link px-2 ">Home</a></li>
               <li><a href="/about" className="text-light text-decoration-none footer-link px-2 ">About</a></li>
               <li><a href="/contactez-nous" className="text-light text-decoration-none footer-link px-2">Contact</a></li>
-              <li><a href="/profile" className="text-light text-decoration-none footer-link px-2">Profile</a></li>
+              <li><a href="profile" className="text-light text-decoration-none footer-link px-2">Profile</a></li>
             </ul>
           </Col>
 
@@ -35,10 +35,10 @@ const Footer = () => {
           <Col md={3} className="mb-4">
             <h6 className="text-uppercase fw-semibold mb-3 p-2">Suivez-nous</h6>
             <div className="d-flex gap-3 px-5">
-              <a href="#" className="social-icon"><FaFacebookF /></a>
-              <a href="#" className="social-icon"><FaTwitter /></a>
-              <a href="#" className="social-icon"><FaInstagram /></a>
-              <a href="#" className="social-icon"><FaLinkedinIn /></a>
+              <a href="https://www.Facebook.com" target="_blank" rel="noopener noreferrer" className="social-icon"><FaFacebookF /></a>
+              <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" className="social-icon"><FaTwitter /></a>
+              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="social-icon"><FaInstagram /></a>
+
             </div>
             
           </Col>

@@ -1,4 +1,4 @@
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, NavLink } from 'react-bootstrap';
 import { FaTruck, FaMoneyBillAlt, FaHeadset, FaPiggyBank } from 'react-icons/fa';
 
 const items = [
@@ -15,6 +15,7 @@ const items = [
   {
     icon: <FaHeadset size={24} className="text-danger" />,
     title: 'CONTACTEZ',
+    link: '/contactez-nous',
     subtitle: '-NOUS',
   },
   {

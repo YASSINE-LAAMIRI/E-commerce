@@ -21,6 +21,9 @@ app.use("/api/auth",require("./routes/auth.route"))
 //route pour la manipulation des users 
 app.use("/api/user",require("./routes/user.route"))
 
+
+
+
 //route pour la manipulation des produits
 
 app.use("/api/product",require("./routes/product.route"))
@@ -29,9 +32,11 @@ app.use('/api/cart', require('./routes/cart.route'));
 // Order routes
 app.use('/api/order', require('./routes/order.route'))
 
+//midelware pour render 
+
 
 //Port
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 5000;
 //listen
 app.listen(PORT,(err)=>{  
       err

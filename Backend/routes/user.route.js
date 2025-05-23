@@ -1,6 +1,9 @@
 const express = require('express')
-const { getAllUsers, deleteUser, getOneUser } = require('../controllers/user.controller')
-const isAdmin = require('../middleware/isAdmin')
+const { getAllUsers, deleteUser, getOneUser,updateProfile } = require('../controllers/user.controller')
+
+
+const isAdmin = require('../middleware/isAdmin');
+const isAuth = require('../middleware/isAuth');
 const router = express.Router();
 
 //pour tester la route
@@ -15,6 +18,8 @@ router.get("/:id",isAdmin,getOneUser)
 
 //admin supprime un utilisateur 
 router.delete("/:id",isAdmin,deleteUser)
+//   l'utilisateur met à jour son profil
+router.put("/profile", isAuth, updateProfile);
 
 
 module.exports= router

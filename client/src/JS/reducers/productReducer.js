@@ -6,7 +6,7 @@ import { ADD_PRODUCT, DELETE_PRODUCT, EDIT_PRODUCT, FAIL_PRODUCT, GET_ALL_PRODUC
 const initialState = {
     loadP:false,
     products: [],
-    myPrduct:[],
+    myProduct:[],
     prod:{},
     success:false,
     error: null,

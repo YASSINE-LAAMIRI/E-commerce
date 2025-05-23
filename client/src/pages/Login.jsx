@@ -28,26 +28,6 @@ const handleLogin=(e)=>{
     <div className='container '>
 {" "}
 {isLoad && <Loading/>}
-{/* <Form onSubmit={handleLogin}>
-      <Form.Group className="mb-3">
-       
-        <Form.Control type="email" placeholder="Enter email" name='email' value={user.email}onChange={handleChange} />
-     
-      </Form.Group>
-
-      <Form.Group className="mb-3" >
-
-        <Form.Control type="password" placeholder="Password" name='password' value={user.password}onChange={handleChange}/>
-      </Form.Group>
-    <p>Nouveau client ? <a href='/register'>S'inscrire</a> maintenant</p>
-      <Button variant="primary" type="submit">
-        Login
-      </Button>
-    </Form> */}
-
-
- {/* style={{ marginTop: '120px' }} 
- style={{ width: '100%', maxWidth: '400px' }}*/}
 
 <Form onSubmit={handleLogin} style={{ margin: '120px' }} >
   <Container>

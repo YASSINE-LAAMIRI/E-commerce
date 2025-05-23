@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllOrders, updateOrderStatus } from '../JS/actions/orderAction';
 import { Container, Row, Col, Card, Badge, Form, Button, Spinner, Alert } from 'react-bootstrap';
-import { FaBoxOpen, FaCalendarAlt, FaEuroSign, FaTruck } from 'react-icons/fa';
+import { FaBoxOpen, FaCalendarAlt, FaTruck } from 'react-icons/fa';
 
 const AllOrders = () => {
   const dispatch = useDispatch();
@@ -87,6 +87,13 @@ const AllOrders = () => {
                 <Card.Body>
                                  <div className="mb-2 text-muted small">
     <strong>👤Client : </strong> {order.user ? order.user.name : 'Inconnu'}
+     
+  </div>
+  <div>
+    
+
+ 
+
   </div>
                   <div className="mb-2 text-muted small">
                     <FaCalendarAlt className="me-2" />
@@ -96,6 +103,7 @@ const AllOrders = () => {
                   <div className="mb-2 text-muted small">
                     <FaTruck className="me-2" />
                     Livraison à : <span className="fw-semibold text-dark">{order.shippingAddress || 'Adresse inconnue'}</span>
+                    
                   </div>
 
                   <hr />

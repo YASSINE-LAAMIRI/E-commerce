@@ -11,3 +11,6 @@ export const DELETE_USER="DELETE_USER"
 
 //Echec
 export const FAIL_USER="FAIL_USER";
+
+export const USER_UPDATE_SUCCESS = "USER_UPDATE_SUCCESS";
+export const USER_UPDATE_FAIL = "USER_UPDATE_FAIL";

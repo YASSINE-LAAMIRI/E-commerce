@@ -7,6 +7,8 @@ import Carrosel from '../components/Carrosel';
 import InfoBanner from '../components/infoBanner';
 
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
+import Loading from '../components/Loading';
+
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -17,7 +19,7 @@ const Home = () => {
   const query = new URLSearchParams(location.search);
   const categoryFromURL = query.get('category') || 'All';
   const [selectedCategory, setSelectedCategory] = useState(categoryFromURL);
-
+const isLoad = useSelector(state=>state.authReducer.isLoad)
   useEffect(() => {
     dispatch(getAllProd());
   }, [dispatch]);
@@ -36,9 +38,11 @@ const Home = () => {
 
   return (
     <Container className="mt-4">
+     
       <Carrosel />
-      <InfoBanner />
-
+      <div className="d-none d-md-block">
+      <InfoBanner /> 
+</div>
       <Row className="mt-5">
         {/* Colonne gauche : catégories */}
 
@@ -51,8 +55,7 @@ const Home = () => {
           key={cat}
           action variant="light"
           active={selectedCategory === cat}
-          onClick={() => handleFilterChange(cat)}
-        >
+          onClick={() => handleFilterChange(cat)}>
           {cat}
         </ListGroup.Item>
       ))}
@@ -61,7 +64,7 @@ const Home = () => {
 </Col>
 
         {/* Colonne droite : produits */}
-        <Col md={9}>
+        <Col md={9}> 
   <ListProd products={filteredProducts} all={true} />
 </Col>
 

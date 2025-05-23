@@ -19,6 +19,8 @@ import MyOrders from './components/MyOrders';
 import Loading from './components/Loading';
 import Contactez from './pages/Contactez';
 import AllOrders from './components/AllOrders';
+import EditProfile from './pages/EditProfile';
+
 
 
 
@@ -50,12 +52,12 @@ function App() {
         {user && isAuth ? (
 <>
           <Route path='/profile' element={<Profile />} />
+          <Route path='/Editprofile' element={<EditProfile/>} />
           <Route path = '/commander' element = { <Commander/> } /> 
           <Route path='/prod/:id' element={<DetailProd />} />         
           <Route path = '/cart' element = { <Cart />} />
           <Route path="/myorders" element={<MyOrders />} />
-          
-             <Route path="/contactez-nous" element={<Contactez/>} />
+          <Route path="/contactez-nous" element={<Contactez/>} />
        
 
 

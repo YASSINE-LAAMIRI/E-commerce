@@ -14,8 +14,7 @@ const User = ({ user }) => {
   return (
     <div>
       <Card style={{ width: '18rem', position: 'relative' }} className="mb-3 shadow-sm">
-        {/* <Card.Img variant="top" src={user.image} alt={user.name} style={{ height: '180px', objectFit: 'cover' }} /> */}
-
+       
         {/* Icône poubelle en position absolue */}
         <FaTrashAlt
           className="delete-icon"

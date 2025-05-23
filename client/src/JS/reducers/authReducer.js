@@ -1,5 +1,6 @@
 const { current } = require("../actions/authAction");
 const { LOAD_AUTH, SUCCESS_AUTH, FAIL_AUTH, CURRENT_AUTH, LOGOUT_AUTH, CLEAR_SUCCESS_AUTH, CLEAR_ERRORS_AUTH } = require("../actionTypes/authActionTypes");
+const { USER_UPDATE_FAIL, USER_UPDATE_SUCCESS } = require("../actionTypes/userActionTypes");
 
 //initialisation 
 const initialstate={
@@ -54,7 +55,12 @@ const authReducer = (state=initialstate,{type,payload})=>{
                 return{
                     ...state,
                     errors:[]
-                }     
+                }   
+            
+            case USER_UPDATE_SUCCESS:
+                 return { ...state, user: payload, success: "Profil mis à jour" };
+            case USER_UPDATE_FAIL:
+                 return { ...state, errors: payload };
     
         default:
            return state;

@@ -20,10 +20,9 @@ const [prodtoEdit,setProdtoEdit] = useState({
     price: product.price,
     image: product.image,
     category: product.category,
-  //category: product.category,
   quantity: product.quantity,
 })
-console.log(prodtoEdit)
+
 const handleChange = (e) => {
   setProdtoEdit({...prodtoEdit,
     [e.target.name]:e.target.value})
